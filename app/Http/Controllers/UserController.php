@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,12 @@ use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
 
+    public function getUser($id){
+        $user = User::find($id);
+        $response=[$user];
+          
+          return response($response,200); 
+    }
     public function register(UserRequest $request){
 
         $user=User::create([
@@ -27,10 +34,10 @@ class UserController extends Controller
         $response=[
             'message'=>'User Created Succefully',
             'user' =>[
+                "id"=>$user->id,
                 'name' => $user->name,
                 'email' => $user->email,
-                'phone_number' => $user->phone_number,
-                'address' => $user->address,
+                "profile" => $user->profile,
             ],
             'token'=>$token,
         ];
@@ -99,14 +106,6 @@ class UserController extends Controller
           return response($message,200);
         }
     
-    //     public function getSales(string $id){
-    //         $sales=Sales::where('agent_id',$id)->get();
-    //         return SalesResource::collection($sales);
-    //     }
-    
-    //     public function getCustomer(string $id){
-    //         $customer=Customer::where('agent_id',$id)->get();
-    //         return CustomerList::collection($customer);
-    // }
+   
           
 }

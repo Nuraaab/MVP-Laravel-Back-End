@@ -29,6 +29,7 @@ class UserRequest extends FormRequest
             'password' => 'required_with:confirm_password|same:confirm_password|string|min:4',  
             "phone_number" => 'required',
             "address" => 'required',  
+            "profile" => 'required',
         ];
     }
     public function failedValidation(Validator $validator)

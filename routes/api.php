@@ -21,7 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::group(['middleware'=>['auth:sanctum']],function(){
     
-    Route::post('/auth/edit/{id}',[UserController::class, 'editProfile'])->name('profile');
+    
     Route::post('/auth/logout', [UserController::class, 'logout'])->name('logout');
   
 
@@ -29,7 +29,7 @@ Route::group(['middleware'=>['auth:sanctum']],function(){
     Route::post('/rental/update/{id}', [RentalController::class, 'updateRental'])->name('updaterental');
     Route::delete('/rental/delete/{id}', [RentalController::class, 'deleteHouse'])->name('deletehouse');
     Route::get('/rental/recommendation/{id}', [RentalController::class, 'getRecomendation'])->name('recomendation');
-   
+    Route::get('/auth/getuser/{id}', [UserController::class, 'getUser'])->name('getuser');
     
     Route::post('/jobs/add', [JobPositionController::class, 'addJob'])->name('addiobs');
     Route::post('/jobs/update/{id}', [JobPositionController::class, 'updateJob'])->name('updatejob');
@@ -41,8 +41,10 @@ Route::group(['middleware'=>['auth:sanctum']],function(){
 Route::controller(UserController::class)->group(function () {
     Route::post('/auth/register', 'register')->name('register');
     Route::post('/auth/login', 'login')->name('login');
+    
 });
 Route::post('rental/upload', [RentalController::class, 'uploadImage'])->name('image');
 Route::get('/image/{fileName}', [RentalController::class, 'getImage'])->name('image');
 Route::get('/rental',[RentalController::class, 'getRental'] )->name('rental');
 Route::get('/jobs', [JobPositionController::class, 'getJobs'])->name('jobs');
+Route::post('/auth/edit/{id}',[UserController::class, 'editProfile'])->name('profile');
