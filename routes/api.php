@@ -24,7 +24,7 @@ Route::group(['middleware'=>['auth:sanctum']],function(){
     
     Route::post('/auth/logout', [UserController::class, 'logout'])->name('logout');
   
-
+    Route::post('/auth/edit/{id}',[UserController::class, 'editProfile'])->name('profile');
     Route::post('/rental/add', [RentalController::class, 'addRental'])->name('addRental');
     Route::post('/rental/update/{id}', [RentalController::class, 'updateRental'])->name('updaterental');
     Route::delete('/rental/delete/{id}', [RentalController::class, 'deleteHouse'])->name('deletehouse');
@@ -47,4 +47,3 @@ Route::post('rental/upload', [RentalController::class, 'uploadImage'])->name('im
 Route::get('/image/{fileName}', [RentalController::class, 'getImage'])->name('image');
 Route::get('/rental',[RentalController::class, 'getRental'] )->name('rental');
 Route::get('/jobs', [JobPositionController::class, 'getJobs'])->name('jobs');
-Route::post('/auth/edit/{id}',[UserController::class, 'editProfile'])->name('profile');
